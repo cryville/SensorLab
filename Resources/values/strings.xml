@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Sensor Lab</string>
+	<string name="dir_e">E</string>
+	<string name="dir_n">N</string>
+	<string name="dir_ne">NE</string>
+	<string name="dir_nw">NW</string>
+	<string name="dir_s">S</string>
+	<string name="dir_se">SE</string>
+	<string name="dir_sw">SW</string>
+	<string name="dir_w">W</string>
+</resources>

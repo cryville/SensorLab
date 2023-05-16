@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">传感器实验室</string>
+	<string name="dir_e">东</string>
+	<string name="dir_n">北</string>
+	<string name="dir_ne">东北</string>
+	<string name="dir_nw">西北</string>
+	<string name="dir_s">南</string>
+	<string name="dir_se">东南</string>
+	<string name="dir_sw">西南</string>
+	<string name="dir_w">西</string>
+</resources>
