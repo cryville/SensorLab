@@ -4,6 +4,8 @@
 /[Bb]uilds/
 /[Ll]ogs/
 
+*.user
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
