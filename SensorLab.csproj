@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\CompassView.cs" />
+    <Compile Include="Controls\RadarCompassView.cs" />
     <Compile Include="Controls\SatelliteCompassView.cs" />
     <Compile Include="Controls\SensorDataView.cs" />
     <Compile Include="Fragments\Home.cs" />
@@ -187,6 +188,12 @@
     </AndroidResource>
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_foreground.png">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_radar.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\item_poi.xml">
+      <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
