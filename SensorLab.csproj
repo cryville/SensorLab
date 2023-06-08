@@ -90,7 +90,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CompassView.cs" />
+    <Compile Include="Controls\CompassView.cs" />
     <Compile Include="Fragments\Home.cs" />
     <Compile Include="GnssStatusReceiver.cs" />
     <Compile Include="Fragments\Compass.cs" />

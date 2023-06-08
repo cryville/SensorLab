@@ -5,7 +5,7 @@ using Android.Views;
 using System;
 using System.Collections.Generic;
 
-namespace SensorLab {
+namespace SensorLab.Controls {
 	public class CompassView : View {
 		static readonly List<CompassView> _instances = new List<CompassView>();
 		public static void Redraw() {
@@ -36,7 +36,19 @@ namespace SensorLab {
 			_colorUnknown = Color.Gray;
 		}
 
+		public CompassView(Context context) : base(context) {
+			_instances.Add(this);
+		}
+
 		public CompassView(Context context, IAttributeSet attrs) : base(context, attrs) {
+			_instances.Add(this);
+		}
+
+		public CompassView(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr) {
+			_instances.Add(this);
+		}
+
+		public CompassView(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes) {
 			_instances.Add(this);
 		}
 
@@ -51,8 +63,6 @@ namespace SensorLab {
 
 		internal static Dictionary<SatelliteIdentifier, SatelliteStatus> Satellites;
 		internal static bool FlipRotation;
-
-		public CompassView(Context context, IAttributeSet attrs, int defStyle) : base(context, attrs, defStyle) { }
 
 		protected override void OnMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 			base.OnMeasure(widthMeasureSpec, heightMeasureSpec);

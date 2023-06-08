@@ -7,6 +7,7 @@ using AndroidX.ViewPager2.Adapter;
 using AndroidX.ViewPager2.Widget;
 using Cryville.Input;
 using Cryville.Input.Xamarin.Android;
+using SensorLab.Controls;
 using System;
 using UnsafeIL;
 
