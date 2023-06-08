@@ -60,10 +60,10 @@ namespace SensorLab.Controls {
 
 		void InflateView(Context context, IAttributeSet attrs) {
 			var view = Inflate(context, Resource.Layout.view_sensor_data, this);
-			_textCaption = view.FindViewById<TextView>(Resource.Id.text_caption);
-			_textUnit = view.FindViewById<TextView>(Resource.Id.text_unit);
-			_textDataValue = view.FindViewById<TextView>(Resource.Id.text_data_value);
-			_textDataAccuracy = view.FindViewById<TextView>(Resource.Id.text_data_accuracy);
+			_textCaption = view.FindViewById<TextView>(Resource.Id.text_sensor_caption);
+			_textUnit = view.FindViewById<TextView>(Resource.Id.text_sensor_unit);
+			_textDataValue = view.FindViewById<TextView>(Resource.Id.text_sensor_data_value);
+			_textDataAccuracy = view.FindViewById<TextView>(Resource.Id.text_sensor_data_accuracy);
 			if (attrs != null) {
 				var a = context.Theme.ObtainStyledAttributes(attrs, Resource.Styleable.SensorLab_Controls_SensorDataView, 0, 0);
 				try {

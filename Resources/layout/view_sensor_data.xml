@@ -9,13 +9,13 @@
 		android:layout_height="wrap_content"
 		android:gravity="center_horizontal">
 		<TextView
-			android:id="@+id/text_caption"
+			android:id="@+id/text_sensor_caption"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="@string/sensor"
 			android:textSize="@dimen/abc_text_size_compact_title" />
 		<TextView
-			android:id="@+id/text_unit"
+			android:id="@+id/text_sensor_unit"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="@string/unit"
@@ -28,12 +28,12 @@
 		android:layout_height="wrap_content"
 		android:gravity="center_horizontal">
 		<TextView
-			android:id="@+id/text_data_value"
+			android:id="@+id/text_sensor_data_value"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textSize="@dimen/abc_text_size_compact_large" />
 		<TextView
-			android:id="@+id/text_data_accuracy"
+			android:id="@+id/text_sensor_data_accuracy"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textSize="@dimen/abc_text_size_compact_small" />
