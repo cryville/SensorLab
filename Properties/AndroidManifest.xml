@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="world.cryville.sensorlab" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="26" android:targetSdkVersion="31" />
-	<application android:allowBackup="true" android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher" android:label="@string/app_name" android:supportsRtl="true" android:theme="@style/Theme.AppCompat.NoActionBar"></application>
+	<application android:allowBackup="true" android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher" android:label="@string/app_name" android:supportsRtl="true" android:theme="@style/Theme.AppCompat.NoActionBar">
+		<provider android:authorities="world.cryville.sensorlab" android:name="world.cryville.sensorlab.PoiProvider" android:exported="true" android:readPermission="world.cryville.sensorlab.permission.READ_POIS" />
+	</application>
+	<permission android:name="world.cryville.sensorlab.permission.READ_POIS" android:protectionLevel="dangerous" />
 	<uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
