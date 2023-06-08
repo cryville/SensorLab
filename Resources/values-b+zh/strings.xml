@@ -20,6 +20,7 @@
 	<string name="location_speed">速度</string>
 	<string name="location_time">时间</string>
 	<string name="nav_overview">总览</string>
+	<string name="nav_radar">雷达</string>
 	<string name="sensor">传感器</string>
 	<string name="sensor_gravity">重力</string>
 	<string name="sensor_gyroscope">陀螺仪</string>

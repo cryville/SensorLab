@@ -93,6 +93,7 @@
     <Compile Include="Controls\CompassView.cs" />
     <Compile Include="Controls\SensorDataView.cs" />
     <Compile Include="Fragments\Home.cs" />
+    <Compile Include="Fragments\Radar.cs" />
     <Compile Include="GnssStatusReceiver.cs" />
     <Compile Include="Fragments\Overview.cs" />
     <Compile Include="InputConsumer.cs" />

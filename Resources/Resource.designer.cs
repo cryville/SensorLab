@@ -11664,58 +11664,64 @@ namespace SensorLab
 			public const int nav_app_bar_open_drawer_description = 2131755175;
 			
 			// aapt resource value: 0x7F1000A8
-			public const int password_toggle_content_description = 2131755176;
+			public const int nav_overview = 2131755176;
 			
 			// aapt resource value: 0x7F1000A9
-			public const int path_password_eye = 2131755177;
+			public const int nav_radar = 2131755177;
 			
 			// aapt resource value: 0x7F1000AA
-			public const int path_password_eye_mask_strike_through = 2131755178;
+			public const int password_toggle_content_description = 2131755178;
 			
 			// aapt resource value: 0x7F1000AB
-			public const int path_password_eye_mask_visible = 2131755179;
+			public const int path_password_eye = 2131755179;
 			
 			// aapt resource value: 0x7F1000AC
-			public const int path_password_strike_through = 2131755180;
-			
-			// aapt resource value: 0x7F1000AE
-			public const int searchbar_scrolling_view_behavior = 2131755182;
-			
-			// aapt resource value: 0x7F1000AF
-			public const int searchview_clear_text_content_description = 2131755183;
-			
-			// aapt resource value: 0x7F1000B0
-			public const int searchview_navigation_content_description = 2131755184;
+			public const int path_password_eye_mask_strike_through = 2131755180;
 			
 			// aapt resource value: 0x7F1000AD
-			public const int search_menu_title = 2131755181;
+			public const int path_password_eye_mask_visible = 2131755181;
+			
+			// aapt resource value: 0x7F1000AE
+			public const int path_password_strike_through = 2131755182;
+			
+			// aapt resource value: 0x7F1000B0
+			public const int searchbar_scrolling_view_behavior = 2131755184;
 			
 			// aapt resource value: 0x7F1000B1
-			public const int sensor = 2131755185;
+			public const int searchview_clear_text_content_description = 2131755185;
 			
 			// aapt resource value: 0x7F1000B2
-			public const int sensor_gravity = 2131755186;
+			public const int searchview_navigation_content_description = 2131755186;
+			
+			// aapt resource value: 0x7F1000AF
+			public const int search_menu_title = 2131755183;
 			
 			// aapt resource value: 0x7F1000B3
-			public const int sensor_gyroscope = 2131755187;
+			public const int sensor = 2131755187;
 			
 			// aapt resource value: 0x7F1000B4
-			public const int sensor_linear_acceleration = 2131755188;
+			public const int sensor_gravity = 2131755188;
 			
 			// aapt resource value: 0x7F1000B5
-			public const int sensor_magnetic_field = 2131755189;
+			public const int sensor_gyroscope = 2131755189;
 			
 			// aapt resource value: 0x7F1000B6
-			public const int side_sheet_accessibility_pane_title = 2131755190;
+			public const int sensor_linear_acceleration = 2131755190;
 			
 			// aapt resource value: 0x7F1000B7
-			public const int side_sheet_behavior = 2131755191;
+			public const int sensor_magnetic_field = 2131755191;
 			
 			// aapt resource value: 0x7F1000B8
-			public const int status_bar_notification_info_overflow = 2131755192;
+			public const int side_sheet_accessibility_pane_title = 2131755192;
 			
 			// aapt resource value: 0x7F1000B9
-			public const int unit = 2131755193;
+			public const int side_sheet_behavior = 2131755193;
+			
+			// aapt resource value: 0x7F1000BA
+			public const int status_bar_notification_info_overflow = 2131755194;
+			
+			// aapt resource value: 0x7F1000BB
+			public const int unit = 2131755195;
 			
 			static String()
 			{

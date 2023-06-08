@@ -20,6 +20,7 @@
 	<string name="location_speed">Speed</string>
 	<string name="location_time">Time</string>
 	<string name="nav_overview">Overview</string>
+	<string name="nav_radar">Radar</string>
 	<string name="sensor">Sensor</string>
 	<string name="sensor_gravity">Gravity</string>
 	<string name="sensor_gyroscope">Gyroscope</string>

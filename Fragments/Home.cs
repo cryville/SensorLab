@@ -11,6 +11,7 @@ using Google.Android.Material.Tabs;
 using SensorLab.Controls;
 using System;
 using UnsafeIL;
+using Object = Java.Lang.Object;
 
 namespace SensorLab.Fragments {
 	public class Home : Fragment {
@@ -63,15 +64,16 @@ namespace SensorLab.Fragments {
 		}
 
 		Overview _fragOverview;
+		Radar _fragRadar;
+		const int NUM_PAGES = 2;
 		class ScreenSlidePagerAdapter : FragmentStateAdapter {
-			const int NUM_PAGES = 1;
-
 			readonly Home _parent;
 
 			public ScreenSlidePagerAdapter(FragmentActivity fa, Home parent) : base(fa) { _parent = parent; }
 
 			public override Fragment CreateFragment(int position) => position switch {
 				0 => _parent._fragOverview = new Overview(),
+				1 => _parent._fragRadar = new Radar(),
 				_ => throw new ArgumentOutOfRangeException(nameof(position)),
 			};
 
@@ -82,6 +84,7 @@ namespace SensorLab.Fragments {
 			public TabConfig(Home parent) { _parent = parent; }
 			public void OnConfigureTab(TabLayout.Tab tab, int position) => tab.SetText(_parent.Resources.GetString(position switch {
 				0 => Resource.String.nav_overview,
+				1 => Resource.String.nav_radar,
 				_ => throw new ArgumentOutOfRangeException(nameof(position)),
 			}));
 		}
