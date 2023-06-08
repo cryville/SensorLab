@@ -1,11 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
 	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:custom="http://schemas.android.com/apk/res-auto"
 	android:orientation="vertical"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
-	<SensorLab.CompassView
-		android:id="@+id/layout_compass"
+	<LinearLayout
+		android:orientation="vertical"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content" />
+		android:layout_height="wrap_content">
+		<SensorLab.Controls.CompassView
+			android:id="@+id/layout_compass"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
+		<TableLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:stretchColumns="*">
+			<TableRow
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+				<SensorLab.Controls.SensorDataView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:id="@+id/sensor_gyroscope"
+					custom:caption="@string/sensor_gyroscope" />
+				<SensorLab.Controls.SensorDataView
+					android:layout_toRightOf="@id/sensor_gravity"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:id="@+id/sensor_magnetic_field"
+					custom:caption="@string/sensor_magnetic_field" />
+				<SensorLab.Controls.SensorDataView
+					android:layout_toRightOf="@id/sensor_magnetic_field"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:id="@+id/sensor_linear_acceleration"
+					custom:caption="@string/sensor_linear_acceleration" />
+			</TableRow>
+			<TableRow
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+				<SensorLab.Controls.SensorDataView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:id="@+id/sensor_gravity"
+					custom:caption="@string/sensor_gravity" />
+				<SensorLab.Controls.SensorDataView
+					android:layout_span="2"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:id="@+id/dof_angles"
+					custom:caption="@string/dof_angles" />
+			</TableRow>
+		</TableLayout>
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+			<SensorLab.Controls.SensorDataView
+				android:layout_width="0dp"
+				android:layout_weight="4"
+				android:layout_height="wrap_content"
+				android:id="@+id/location_latitude"
+				custom:caption="@string/location_latitude" />
+			<SensorLab.Controls.SensorDataView
+				android:layout_width="0dp"
+				android:layout_weight="4"
+				android:layout_height="wrap_content"
+				android:id="@+id/location_longitude"
+				custom:caption="@string/location_longitude" />
+			<SensorLab.Controls.SensorDataView
+				android:layout_width="0dp"
+				android:layout_weight="3"
+				android:layout_height="wrap_content"
+				android:id="@+id/location_accuracy"
+				custom:caption="@string/location_accuracy" />
+		</LinearLayout>
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+			<SensorLab.Controls.SensorDataView
+				android:layout_width="0dp"
+				android:layout_weight="1"
+				android:layout_height="wrap_content"
+				android:id="@+id/location_bearing"
+				custom:caption="@string/location_bearing" />
+			<SensorLab.Controls.SensorDataView
+				android:layout_width="0dp"
+				android:layout_weight="1"
+				android:layout_height="wrap_content"
+				android:id="@+id/location_speed"
+				custom:caption="@string/location_speed" />
+			<SensorLab.Controls.SensorDataView
+				android:layout_width="0dp"
+				android:layout_weight="1"
+				android:layout_height="wrap_content"
+				android:id="@+id/location_altitude"
+				custom:caption="@string/location_altitude" />
+		</LinearLayout>
+		<SensorLab.Controls.SensorDataView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/location_time"
+			custom:caption="@string/location_time" />
+	</LinearLayout>
 </ScrollView>

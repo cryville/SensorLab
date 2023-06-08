@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\CompassView.cs" />
+    <Compile Include="Controls\SensorDataView.cs" />
     <Compile Include="Fragments\Home.cs" />
     <Compile Include="GnssStatusReceiver.cs" />
     <Compile Include="Fragments\Compass.cs" />
@@ -168,6 +169,15 @@
     </AndroidResource>
     <AndroidResource Include="Resources\layout\fragment_home.xml">
       <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\view_sensor_data.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\values\attrs.xml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\values\dimens.xml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
     </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

@@ -8,4 +8,21 @@
 	<string name="dir_se">东南</string>
 	<string name="dir_sw">西南</string>
 	<string name="dir_w">西</string>
+	<string name="dof_angles">方位角 / 俯仰角 / 翻滚角</string>
+	<string name="dof_azimuth">方位角</string>
+	<string name="dof_pitch">俯仰角</string>
+	<string name="dof_roll">翻滚角</string>
+	<string name="location_accuracy">精度</string>
+	<string name="location_altitude">海拔</string>
+	<string name="location_bearing">方位</string>
+	<string name="location_latitude">纬度</string>
+	<string name="location_longitude">经度</string>
+	<string name="location_speed">速度</string>
+	<string name="location_time">时间</string>
+	<string name="sensor">传感器</string>
+	<string name="sensor_gravity">重力</string>
+	<string name="sensor_gyroscope">陀螺仪</string>
+	<string name="sensor_linear_acceleration">线性加速度</string>
+	<string name="sensor_magnetic_field">磁场</string>
+	<string name="unit">单位</string>
 </resources>

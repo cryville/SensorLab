@@ -1,0 +1,6 @@
+<resources>
+	<declare-styleable name="SensorLab.Controls.SensorDataView">
+		<attr name="caption" format="string" />
+		<attr name="unit" format="string" />
+	</declare-styleable>
+</resources>

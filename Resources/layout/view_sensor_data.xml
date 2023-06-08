@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_horizontal">
+		<TextView
+			android:id="@+id/text_caption"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/sensor"
+			android:textSize="@dimen/abc_text_size_compact_title" />
+		<TextView
+			android:id="@+id/text_unit"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/unit"
+			android:textSize="@dimen/abc_text_size_compact_subtitle"
+			android:layout_marginLeft="@dimen/abc_text_margin_compact_subtitle" />
+	</LinearLayout>
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_horizontal">
+		<TextView
+			android:id="@+id/text_data_value"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="@dimen/abc_text_size_compact_large" />
+		<TextView
+			android:id="@+id/text_data_accuracy"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="@dimen/abc_text_size_compact_small" />
+	</LinearLayout>
+</LinearLayout>

@@ -1,0 +1,7 @@
+<resources>
+	<dimen name="abc_text_margin_compact_subtitle">4sp</dimen>
+	<dimen name="abc_text_size_compact_large">21sp</dimen>
+	<dimen name="abc_text_size_compact_small">15sp</dimen>
+	<dimen name="abc_text_size_compact_subtitle">12sp</dimen>
+	<dimen name="abc_text_size_compact_title">15sp</dimen>
+</resources>
