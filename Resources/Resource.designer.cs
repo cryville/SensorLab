@@ -10917,10 +10917,10 @@ namespace SensorLab
 			public const int design_text_input_start_icon = 2131427374;
 			
 			// aapt resource value: 0x7F0B002F
-			public const int fragment_compass = 2131427375;
+			public const int fragment_home = 2131427375;
 			
 			// aapt resource value: 0x7F0B0030
-			public const int fragment_home = 2131427376;
+			public const int fragment_overview = 2131427376;
 			
 			// aapt resource value: 0x7F0B0031
 			public const int m3_alert_dialog = 2131427377;

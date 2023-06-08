@@ -7,6 +7,7 @@ using AndroidX.ViewPager2.Adapter;
 using AndroidX.ViewPager2.Widget;
 using Cryville.Input;
 using Cryville.Input.Xamarin.Android;
+using Google.Android.Material.Tabs;
 using SensorLab.Controls;
 using System;
 using UnsafeIL;
@@ -52,6 +53,8 @@ namespace SensorLab.Fragments {
 			_viewPager = view.FindViewById<ViewPager2>(Resource.Id.view_pager);
 			_viewPager.Adapter = new ScreenSlidePagerAdapter(Activity, this);
 
+			new TabLayoutMediator(view.FindViewById<TabLayout>(Resource.Id.tabs), _viewPager, new TabConfig(this)).Attach();
+
 			_compass = view.FindViewById<CompassView>(Resource.Id.layout_compass);
 			CompassView.Satellites = _gnssRecv.ActiveSatellites;
 			Start();
@@ -73,6 +76,14 @@ namespace SensorLab.Fragments {
 			};
 
 			public override int ItemCount => NUM_PAGES;
+		}
+		class TabConfig : Object, TabLayoutMediator.ITabConfigurationStrategy {
+			readonly Home _parent;
+			public TabConfig(Home parent) { _parent = parent; }
+			public void OnConfigureTab(TabLayout.Tab tab, int position) => tab.SetText(_parent.Resources.GetString(position switch {
+				0 => Resource.String.nav_overview,
+				_ => throw new ArgumentOutOfRangeException(nameof(position)),
+			}));
 		}
 
 		readonly float[] _rvbuf = new float[4];
