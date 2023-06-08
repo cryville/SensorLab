@@ -5,7 +5,14 @@ using System;
 
 namespace SensorLab {
 	internal class LocationReceiver : Java.Lang.Object, ILocationListener {
-		public void OnLocationChanged(Location location) { }
+		readonly Action<Location> _cb;
+		public LocationReceiver(Action<Location> cb) {
+			_cb = cb;
+		}
+
+		public void OnLocationChanged(Location location) {
+			_cb(location);
+		}
 
 		public void OnProviderDisabled(string provider) { }
 

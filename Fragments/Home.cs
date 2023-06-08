@@ -44,7 +44,7 @@ namespace SensorLab.Fragments {
 			_gnssRecv = new GnssStatusReceiver();
 			_gnssRecv.SatelliteStatusChanged += OnSatelliteStatusChanged;
 			_locMgr = (LocationManager)Activity.GetSystemService(Android.Content.Context.LocationService);
-			_locRecv = new LocationReceiver();
+			_locRecv = new LocationReceiver(OnLocation);
 		}
 
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,14 +59,18 @@ namespace SensorLab.Fragments {
 			return view;
 		}
 
+		Compass _fragCompass;
 		class ScreenSlidePagerAdapter : FragmentStateAdapter {
-			const int NUM_PAGES = 2;
+			const int NUM_PAGES = 1;
 
-			public ScreenSlidePagerAdapter(FragmentActivity fa) : base(fa) { }
+			readonly Home _parent;
 
-			public override Fragment CreateFragment(int position) {
-				return new Compass();
-			}
+			public ScreenSlidePagerAdapter(FragmentActivity fa, Home parent) : base(fa) { _parent = parent; }
+
+			public override Fragment CreateFragment(int position) => position switch {
+				0 => _parent._fragCompass = new Compass(),
+				_ => throw new ArgumentOutOfRangeException(nameof(position)),
+			};
 
 			public override int ItemCount => NUM_PAGES;
 		}
@@ -75,7 +79,9 @@ namespace SensorLab.Fragments {
 		readonly float[] _rmbuf = new float[9];
 		readonly float[] _orbuf = new float[3];
 		private unsafe void InputConsumer_OnInput(InputIdentifier identifier, InputFrame frame) {
-			if (identifier.Source.Handler is AndroidRotationVectorHandler) {
+			var handler = identifier.Source.Handler;
+			frame = handler.ReferenceCue.InverseTransform(frame);
+			if (handler is AndroidRotationVectorHandler) {
 				var vec = frame.Vector;
 				fixed (float* ptr = _rvbuf) {
 					Unsafe.CopyBlock(ptr, &vec, 4 * sizeof(float));
@@ -83,10 +89,16 @@ namespace SensorLab.Fragments {
 				SensorManager.GetRotationMatrixFromVector(_rmbuf, _rvbuf);
 				SensorManager.GetOrientation(_rmbuf, _orbuf);
 				CompassView.CompassRotation = _orbuf[0] / MathF.PI * 180;
+				_fragCompass?.OnRotationInput(_orbuf);
 			}
-			else if (identifier.Source.Handler is AndroidGravityHandler) {
+			else if (handler is AndroidGravityHandler) {
 				CompassView.FlipRotation = frame.Vector.Z < 0;
 			}
+			_fragCompass?.OnInput(identifier, frame);
+		}
+
+		private void OnLocation(Location location) {
+			_fragCompass?.OnLocation(location);
 		}
 
 		public override void OnPause() {
