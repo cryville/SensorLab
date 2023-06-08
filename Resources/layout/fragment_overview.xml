@@ -9,7 +9,7 @@
 		android:orientation="vertical"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content">
-		<SensorLab.Controls.CompassView
+		<SensorLab.Controls.SatelliteCompassView
 			android:id="@+id/layout_compass"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content" />
