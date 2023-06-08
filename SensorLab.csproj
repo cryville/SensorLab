@@ -94,7 +94,7 @@
     <Compile Include="Controls\SensorDataView.cs" />
     <Compile Include="Fragments\Home.cs" />
     <Compile Include="GnssStatusReceiver.cs" />
-    <Compile Include="Fragments\Compass.cs" />
+    <Compile Include="Fragments\Overview.cs" />
     <Compile Include="InputConsumer.cs" />
     <Compile Include="LocationReceiver.cs" />
     <Compile Include="MainActivity.cs" />
@@ -112,8 +112,6 @@
     <AndroidResource Include="Resources\values\ic_launcher_background.xml" />
     <AndroidResource Include="Resources\values\strings.xml" />
     <AndroidResource Include="Resources\values\styles.xml" />
-    <AndroidResource Include="Resources\mipmap-anydpi-v26\ic_launcher.xml" />
-    <AndroidResource Include="Resources\mipmap-anydpi-v26\ic_launcher_round.xml" />
     <AndroidResource Include="Resources\mipmap-hdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\mipmap-mdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\mipmap-xhdpi\ic_launcher.png" />
@@ -154,7 +152,7 @@
     </AndroidResource>
     <Content Include="Plugins\UnsafeIL.dll" />
     <AndroidResource Include="Resources\navigation\nav_graph.xml" />
-    <AndroidResource Include="Resources\layout\fragment_compass.xml">
+    <AndroidResource Include="Resources\layout\fragment_overview.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\fragment_home.xml">

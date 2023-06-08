@@ -50,7 +50,7 @@ namespace SensorLab.Fragments {
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 			var view = inflater.Inflate(Resource.Layout.fragment_home, container, false);
 			_viewPager = view.FindViewById<ViewPager2>(Resource.Id.view_pager);
-			_viewPager.Adapter = new ScreenSlidePagerAdapter(Activity);
+			_viewPager.Adapter = new ScreenSlidePagerAdapter(Activity, this);
 
 			_compass = view.FindViewById<CompassView>(Resource.Id.layout_compass);
 			CompassView.Satellites = _gnssRecv.ActiveSatellites;
@@ -59,7 +59,7 @@ namespace SensorLab.Fragments {
 			return view;
 		}
 
-		Compass _fragCompass;
+		Overview _fragOverview;
 		class ScreenSlidePagerAdapter : FragmentStateAdapter {
 			const int NUM_PAGES = 1;
 
@@ -68,7 +68,7 @@ namespace SensorLab.Fragments {
 			public ScreenSlidePagerAdapter(FragmentActivity fa, Home parent) : base(fa) { _parent = parent; }
 
 			public override Fragment CreateFragment(int position) => position switch {
-				0 => _parent._fragCompass = new Compass(),
+				0 => _parent._fragOverview = new Overview(),
 				_ => throw new ArgumentOutOfRangeException(nameof(position)),
 			};
 
@@ -89,16 +89,16 @@ namespace SensorLab.Fragments {
 				SensorManager.GetRotationMatrixFromVector(_rmbuf, _rvbuf);
 				SensorManager.GetOrientation(_rmbuf, _orbuf);
 				CompassView.CompassRotation = _orbuf[0] / MathF.PI * 180;
-				_fragCompass?.OnRotationInput(_orbuf);
+				_fragOverview?.OnRotationInput(_orbuf);
 			}
 			else if (handler is AndroidGravityHandler) {
 				CompassView.FlipRotation = frame.Vector.Z < 0;
 			}
-			_fragCompass?.OnInput(identifier, frame);
+			_fragOverview?.OnInput(identifier, frame);
 		}
 
 		private void OnLocation(Location location) {
-			_fragCompass?.OnLocation(location);
+			_fragOverview?.OnLocation(location);
 		}
 
 		public override void OnPause() {

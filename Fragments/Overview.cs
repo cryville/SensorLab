@@ -8,7 +8,7 @@ using SensorLab.Controls;
 using System;
 
 namespace SensorLab.Fragments {
-	public class Compass : Fragment {
+	public class Overview : Fragment {
 		public override void OnCreate(Bundle savedInstanceState) {
 			base.OnCreate(savedInstanceState);
 		}
@@ -28,7 +28,7 @@ namespace SensorLab.Fragments {
 		SensorDataView _viewLocTime;
 
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-			var view = inflater.Inflate(Resource.Layout.fragment_compass, container, false);
+			var view = inflater.Inflate(Resource.Layout.fragment_overview, container, false);
 
 			_viewLinearAcceleration = view.FindViewById<SensorDataView>(Resource.Id.sensor_linear_acceleration);
 			_viewMagneticField = view.FindViewById<SensorDataView>(Resource.Id.sensor_magnetic_field);
