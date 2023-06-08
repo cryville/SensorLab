@@ -9,6 +9,8 @@ using AndroidX.AppCompat.Widget;
 using AndroidX.DrawerLayout.Widget;
 using AndroidX.Navigation.Fragment;
 using AndroidX.Navigation.UI;
+using Java.Lang;
+using Java.Util;
 
 namespace SensorLab {
 	[Activity(Label = "@string/app_name", Theme = "@style/Theme.AppCompat.NoActionBar", MainLauncher = true)]
@@ -17,8 +19,18 @@ namespace SensorLab {
 			base.OnCreate(savedInstanceState);
 			Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 			SetContentView(Resource.Layout.activity_main);
-
 			SetSupportActionBar(FindViewById<Toolbar>(Resource.Id.toolbar));
+
+			RegisterForActivityResult(
+				new ActivityResultContracts.RequestMultiplePermissions(),
+				new ActivityResultHandler(this)
+			).Launch(new string[] {
+				Manifest.Permission.AccessCoarseLocation,
+				Manifest.Permission.AccessFineLocation,
+			});
+		}
+
+		void OnLocationPermissionRequested() {
 			var navHostFrag = (NavHostFragment)SupportFragmentManager.FindFragmentById(Resource.Id.nav_host_fragment);
 			var navCtrl = navHostFrag.NavController;
 			var appBarConf = new AppBarConfiguration.Builder(navCtrl.Graph)
@@ -26,18 +38,17 @@ namespace SensorLab {
 				.Build();
 			var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
 			NavigationUI.SetupWithNavController(toolbar, navCtrl, appBarConf);
-
-			RegisterForActivityResult(
-				new ActivityResultContracts.RequestMultiplePermissions(),
-				new ActivityResultHandler()
-			).Launch(new string[] {
-				Manifest.Permission.AccessCoarseLocation,
-				Manifest.Permission.AccessFineLocation,
-			});
 		}
 
-		class ActivityResultHandler : Java.Lang.Object, IActivityResultCallback {
-			public void OnActivityResult(Java.Lang.Object result) { }
+		class ActivityResultHandler : Object, IActivityResultCallback {
+			readonly MainActivity _activity;
+
+			public ActivityResultHandler(MainActivity activity) { _activity = activity; }
+
+			public void OnActivityResult(Object result) {
+				IMap map = (IMap)result;
+				_activity.OnLocationPermissionRequested();
+			}
 		}
 
 		public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults) {
