@@ -8,7 +8,7 @@ using Java.Lang;
 namespace SensorLab {
 	[Register("world.cryville.sensorlab.PoiProvider")]
 	public class PoiProvider : ContentProvider {
-		static readonly Uri _uri = Uri.Parse("content://world.cryville.sensorlab/pois");
+		public static readonly Uri Uri = Uri.Parse("content://world.cryville.sensorlab/pois");
 		static readonly UriMatcher _uriMatcher = new UriMatcher(UriMatcher.NoMatch);
 		static PoiProvider() {
 			_uriMatcher.AddURI("world.cryville.sensorlab", "pois", 1);
@@ -63,7 +63,7 @@ namespace SensorLab {
 		public override Uri Insert(Uri uri, ContentValues values) {
 			var rowId = _db.Insert("Pois", null, values);
 			if (rowId >= 0) {
-				Uri itemUri = ContentUris.WithAppendedId(_uri, rowId);
+				Uri itemUri = ContentUris.WithAppendedId(Uri, rowId);
 				Context.ContentResolver.NotifyChange(itemUri, null);
 				return itemUri;
 			}
