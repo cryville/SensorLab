@@ -94,6 +94,7 @@
     <Compile Include="Controls\RadarCompassView.cs" />
     <Compile Include="Controls\SatelliteCompassView.cs" />
     <Compile Include="Controls\SensorDataView.cs" />
+    <Compile Include="Dialogs\PoiDialog.cs" />
     <Compile Include="Fragments\Home.cs" />
     <Compile Include="Fragments\Radar.cs" />
     <Compile Include="GnssStatusReceiver.cs" />
@@ -193,6 +194,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\item_poi.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\dialog_poi.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

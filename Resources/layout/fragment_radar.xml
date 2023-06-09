@@ -1,19 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:orientation="vertical"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
-	<SensorLab.Controls.RadarCompassView
-		android:id="@+id/layout_compass"
+	<LinearLayout
+		android:orientation="vertical"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content" />
-	<androidx.recyclerview.widget.RecyclerView
-		android:id="@+id/list_poi"
-		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+		<SensorLab.Controls.RadarCompassView
+			android:id="@+id/layout_compass"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/list_poi"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginHorizontal="12sp"
+			android:layout_marginVertical="4sp"
+			app:layoutManager="LinearLayoutManager" />
+	</LinearLayout>
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_marginHorizontal="12sp"
-		android:layout_marginVertical="4sp"
-		app:layoutManager="LinearLayoutManager" />
-</LinearLayout>
+		android:layout_gravity="bottom|end"
+		android:layout_marginBottom="16dp">
+		<com.google.android.material.floatingactionbutton.FloatingActionButton
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginRight="16dp"
+			android:src="@android:drawable/ic_menu_search" />
+		<com.google.android.material.floatingactionbutton.FloatingActionButton
+			android:id="@+id/fab_add_poi"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginRight="16dp"
+			android:src="@android:drawable/ic_menu_add" />
+	</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
