@@ -1,14 +1,16 @@
 using Android.Content;
 using Android.Database;
-using Android.Net;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
 using AndroidX.Fragment.App;
 using AndroidX.RecyclerView.Widget;
+using Google.Android.Material.FloatingActionButton;
+using SensorLab.Dialogs;
 
 namespace SensorLab.Fragments {
 	public class Radar : Fragment {
+		internal ContentResolver _resolver;
 		RecyclerView _poiList;
 
 		public override void OnCreate(Bundle savedInstanceState) {
@@ -17,41 +19,75 @@ namespace SensorLab.Fragments {
 
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 			var view = inflater.Inflate(Resource.Layout.fragment_radar, container, false);
+			_resolver = Context.ContentResolver;
+			view.FindViewById<FloatingActionButton>(Resource.Id.fab_add_poi).Click += FabAddPoi_Click;
 			_poiList = view.FindViewById<RecyclerView>(Resource.Id.list_poi);
-			_poiList.SetAdapter(new PoiRecyclerViewAdapter(Context.ContentResolver));
+			_poiList.SetAdapter(new PoiRecyclerViewAdapter(this));
 			return view;
+		}
+
+		private void FabAddPoi_Click(object sender, System.EventArgs e) {
+			OpenPoiDialog(null);
+		}
+		internal void OpenPoiDialog(int? id) {
+			new PoiDialog(_resolver, id).Show(ParentFragmentManager, null);
 		}
 	}
 	class PoiRecyclerViewAdapter : RecyclerView.Adapter {
 		class ViewHolder : RecyclerView.ViewHolder {
+			readonly PoiRecyclerViewAdapter _parent;
 			public TextView Caption { get; private set; }
-			public ViewHolder(View view) : base(view) {
+			public int Id { get; set; }
+			public ViewHolder(PoiRecyclerViewAdapter parent, View view) : base(view) {
+				_parent = parent;
 				Caption = view.FindViewById<TextView>(Resource.Id.text_poi_caption);
+				view.Click += View_Click;
+			}
+			private void View_Click(object sender, System.EventArgs e) {
+				_parent._parent.OpenPoiDialog(Id);
 			}
 		}
 
-		static readonly Uri _uri = Uri.Parse("content://world.cryville.sensorlab/pois");
-		readonly ContentResolver _resolver;
-		readonly ICursor _cursor;
-		readonly int _colName;
-		public PoiRecyclerViewAdapter(ContentResolver resolver) {
-			_resolver = resolver;
-			_cursor = _resolver.Query(_uri, null, null, null, null);
-			_colName = _cursor.GetColumnIndex("name");
-			m_itemCount = _cursor.Count;
+		class Observer : ContentObserver {
+			readonly PoiRecyclerViewAdapter _parent;
+			public Observer(PoiRecyclerViewAdapter parent) : base(new Handler(Looper.MainLooper)) { _parent = parent; }
+			public override void OnChange(bool selfChange) {
+				base.OnChange(selfChange);
+				_parent.RefreshData();
+				_parent.NotifyDataSetChanged();
+			}
 		}
 
-		readonly int m_itemCount;
-		public override int ItemCount => m_itemCount;
+		readonly Radar _parent;
+		readonly Observer _observer;
+		ICursor _cursor;
+		readonly int _colId;
+		readonly int _colName;
+		public PoiRecyclerViewAdapter(Radar parent) {
+			_parent = parent;
+			_observer = new Observer(this);
+			RefreshData();
+			_colId = _cursor.GetColumnIndex("id");
+			_colName = _cursor.GetColumnIndex("name");
+		}
+
+		void RefreshData() {
+			_cursor?.Close();
+			_cursor = _parent._resolver.Query(PoiProvider.Uri, null, null, null, null);
+			_cursor.RegisterContentObserver(_observer);
+		}
+
+		public override int ItemCount => _cursor.Count;
+
+		public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
+			return new ViewHolder(this, LayoutInflater.From(parent.Context).Inflate(Resource.Layout.item_poi, parent, false));
+		}
 
 		public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 			var h = (ViewHolder)holder;
 			_cursor.MoveToPosition(position);
+			h.Id = _cursor.GetInt(_colId);
 			h.Caption.Text = _cursor.GetString(_colName);
-		}
-
-		public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-			return new ViewHolder(LayoutInflater.From(parent.Context).Inflate(Resource.Layout.item_poi, parent, false));
 		}
 	}
 }
