@@ -18,8 +18,6 @@ namespace SensorLab {
 		protected override void OnCreate(Bundle savedInstanceState) {
 			base.OnCreate(savedInstanceState);
 			Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-			SetContentView(Resource.Layout.activity_main);
-			SetSupportActionBar(FindViewById<Toolbar>(Resource.Id.toolbar));
 
 			RegisterForActivityResult(
 				new ActivityResultContracts.RequestMultiplePermissions(),
@@ -31,6 +29,8 @@ namespace SensorLab {
 		}
 
 		void OnLocationPermissionRequested() {
+			SetContentView(Resource.Layout.activity_main);
+			SetSupportActionBar(FindViewById<Toolbar>(Resource.Id.toolbar));
 			var navHostFrag = (NavHostFragment)SupportFragmentManager.FindFragmentById(Resource.Id.nav_host_fragment);
 			var navCtrl = navHostFrag.NavController;
 			var appBarConf = new AppBarConfiguration.Builder(navCtrl.Graph)
