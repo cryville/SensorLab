@@ -40,20 +40,27 @@
 			android:contentDescription="@string/location"
 			android:src="@android:drawable/ic_menu_mylocation" />
 	</LinearLayout>
-	<LinearLayout
+	<RelativeLayout
 		android:orientation="horizontal"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:gravity="right">
+		android:layout_height="wrap_content">
+		<Button
+			android:id="@+id/btn_delete"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentLeft="true"
+			android:text="@string/action_delete" />
 		<Button
 			android:id="@+id/btn_cancel"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_toLeftOf="@id/btn_ok"
 			android:text="@android:string/cancel" />
 		<Button
 			android:id="@+id/btn_ok"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_alignParentRight="true"
 			android:text="@android:string/ok" />
-	</LinearLayout>
+	</RelativeLayout>
 </LinearLayout>

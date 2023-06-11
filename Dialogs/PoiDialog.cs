@@ -46,6 +46,7 @@ namespace SensorLab.Dialogs {
 				);
 			}
 
+			view.FindViewById<Button>(Resource.Id.btn_delete).Click += DeleteButton_Click;
 			view.FindViewById<Button>(Resource.Id.btn_cancel).Click += CancelButton_Click;
 			view.FindViewById<Button>(Resource.Id.btn_ok).Click += OkButton_Click;
 
@@ -57,6 +58,13 @@ namespace SensorLab.Dialogs {
 			var m = Regex.Match(e.Editable.ToString(), _regexLocation);
 			if (m.Success) _locationInputLayout.Error = null;
 			else _locationInputLayout.Error = Resources.GetString(Resource.String.error_invalid_format);
+		}
+
+		private void DeleteButton_Click(object sender, EventArgs e) {
+			if (_id != null) {
+				_resolver.Delete(PoiProvider.Uri, "id = ?", new string[] { _id.Value.ToString(CultureInfo.InvariantCulture) });
+			}
+			Dismiss();
 		}
 
 		private void CancelButton_Click(object sender, EventArgs e) {
