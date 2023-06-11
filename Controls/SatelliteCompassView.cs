@@ -2,6 +2,7 @@ using Android.Content;
 using Android.Graphics;
 using Android.Util;
 using System;
+using System.Collections.Generic;
 
 namespace SensorLab.Controls {
 	public class SatelliteCompassView : CompassView {
@@ -27,6 +28,8 @@ namespace SensorLab.Controls {
 		public SatelliteCompassView(Context context, IAttributeSet attrs) : base(context, attrs) { }
 		public SatelliteCompassView(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr) { }
 		public SatelliteCompassView(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) : base(context, attrs, defStyleAttr, defStyleRes) { }
+
+		internal Dictionary<SatelliteIdentifier, SatelliteStatus> Satellites;
 
 		const float _satelliteSize = 0.02f;
 		protected override void DrawContent(Canvas canvas, float flip) {

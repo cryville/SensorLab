@@ -1,3 +1,4 @@
+using Android.Content;
 using Android.Locations;
 using Android.OS;
 using Android.Views;
@@ -9,9 +10,17 @@ using System;
 
 namespace SensorLab.Fragments {
 	public class Overview : Fragment {
+		LocationManager _locMgr;
+		GnssStatusReceiver _gnssRecv;
+
 		public override void OnCreate(Bundle savedInstanceState) {
 			base.OnCreate(savedInstanceState);
+			_locMgr = (LocationManager)Activity.GetSystemService(Context.LocationService);
+			_gnssRecv = new GnssStatusReceiver();
+			_gnssRecv.SatelliteStatusChanged += OnSatelliteStatusChanged;
 		}
+
+		SatelliteCompassView _compass;
 
 		SensorDataView _viewLinearAcceleration;
 		SensorDataView _viewMagneticField;
@@ -30,6 +39,9 @@ namespace SensorLab.Fragments {
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 			var view = inflater.Inflate(Resource.Layout.fragment_overview, container, false);
 
+			_compass = view.FindViewById<SatelliteCompassView>(Resource.Id.layout_compass);
+			_compass.Satellites = _gnssRecv.ActiveSatellites;
+
 			_viewLinearAcceleration = view.FindViewById<SensorDataView>(Resource.Id.sensor_linear_acceleration);
 			_viewMagneticField = view.FindViewById<SensorDataView>(Resource.Id.sensor_magnetic_field);
 			_viewGravity = view.FindViewById<SensorDataView>(Resource.Id.sensor_gravity);
@@ -44,7 +56,36 @@ namespace SensorLab.Fragments {
 			_viewLocAccuracy = view.FindViewById<SensorDataView>(Resource.Id.location_accuracy);
 			_viewLocTime = view.FindViewById<SensorDataView>(Resource.Id.location_time);
 
+			Start();
+
 			return view;
+		}
+
+		public override void OnPause() {
+			base.OnPause();
+			Pause();
+		}
+
+		public override void OnResume() {
+			base.OnResume();
+			Start();
+		}
+
+		public override void OnDestroy() {
+			base.OnDestroy();
+			Pause();
+		}
+
+		void Start() {
+			_locMgr.RegisterGnssStatusCallback(_gnssRecv, null);
+		}
+
+		void Pause() {
+			_locMgr.UnregisterGnssStatusCallback(_gnssRecv);
+		}
+
+		private void OnSatelliteStatusChanged() {
+			_compass.Invalidate();
 		}
 
 		internal void OnInput(InputIdentifier identifier, InputFrame frame) {

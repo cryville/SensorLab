@@ -53,11 +53,8 @@ namespace SensorLab.Fragments {
 			var view = inflater.Inflate(Resource.Layout.fragment_home, container, false);
 			_viewPager = view.FindViewById<ViewPager2>(Resource.Id.view_pager);
 			_viewPager.Adapter = new ScreenSlidePagerAdapter(Activity, this);
-
 			new TabLayoutMediator(view.FindViewById<TabLayout>(Resource.Id.tabs), _viewPager, new TabConfig(this)).Attach();
 
-			_compass = view.FindViewById<CompassView>(Resource.Id.layout_compass);
-			CompassView.Satellites = _gnssRecv.ActiveSatellites;
 			Start();
 
 			return view;

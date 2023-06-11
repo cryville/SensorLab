@@ -36,7 +36,6 @@ namespace SensorLab.Controls {
 			}
 		}
 
-		internal static Dictionary<SatelliteIdentifier, SatelliteStatus> Satellites;
 		internal static bool FlipRotation;
 
 		protected sealed override void OnMeasure(int widthMeasureSpec, int heightMeasureSpec) {
