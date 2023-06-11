@@ -5,6 +5,7 @@ using Android.Widget;
 using AndroidX.AppCompat.App;
 using AndroidX.Fragment.App;
 using Google.Android.Material.TextField;
+using SensorLab.Fragments;
 using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
@@ -46,12 +47,17 @@ namespace SensorLab.Dialogs {
 				);
 			}
 
+			view.FindViewById<ImageView>(Resource.Id.btn_poi_current_location).Click += GetCurrentLocation_Click;
 			view.FindViewById<Button>(Resource.Id.btn_delete).Click += DeleteButton_Click;
 			view.FindViewById<Button>(Resource.Id.btn_cancel).Click += CancelButton_Click;
 			view.FindViewById<Button>(Resource.Id.btn_ok).Click += OkButton_Click;
 
 			builder.SetView(view);
 			return builder.Create();
+		}
+
+		private void GetCurrentLocation_Click(object sender, EventArgs e) {
+			_locationInput.Text = ToLocationString(Home.CurrentLocation.Latitude, Home.CurrentLocation.Longitude);
 		}
 
 		private unsafe void LocationInput_AfterTextChanged(object sender, AfterTextChangedEventArgs e) {
