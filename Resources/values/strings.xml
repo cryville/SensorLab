@@ -17,6 +17,7 @@
 	<string name="location_accuracy">Accuracy</string>
 	<string name="location_altitude">Altitude</string>
 	<string name="location_bearing">Bearing</string>
+	<string name="location_fixing">Fixing...</string>
 	<string name="location_input_hint">Location (e.g. 12\'34\'56 12\'34\'56)</string>
 	<string name="location_latitude">Latitude</string>
 	<string name="location_longitude">Longitude</string>

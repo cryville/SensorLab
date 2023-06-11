@@ -1,16 +1,21 @@
 using Android.Content;
 using Android.Database;
+using Android.Locations;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
 using AndroidX.Fragment.App;
 using AndroidX.RecyclerView.Widget;
 using Google.Android.Material.FloatingActionButton;
+using SensorLab.Controls;
 using SensorLab.Dialogs;
 
 namespace SensorLab.Fragments {
 	public class Radar : Fragment {
 		internal ContentResolver _resolver;
+
+		RadarCompassView _compass;
+
 		RecyclerView _poiList;
 
 		public override void OnCreate(Bundle savedInstanceState) {
@@ -19,10 +24,16 @@ namespace SensorLab.Fragments {
 
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 			var view = inflater.Inflate(Resource.Layout.fragment_radar, container, false);
+
+			_compass = view.FindViewById<RadarCompassView>(Resource.Id.layout_compass);
+
 			_resolver = Context.ContentResolver;
+
 			view.FindViewById<FloatingActionButton>(Resource.Id.fab_add_poi).Click += FabAddPoi_Click;
+
 			_poiList = view.FindViewById<RecyclerView>(Resource.Id.list_poi);
 			_poiList.SetAdapter(new PoiRecyclerViewAdapter(this));
+
 			return view;
 		}
 
@@ -31,6 +42,9 @@ namespace SensorLab.Fragments {
 		}
 		internal void OpenPoiDialog(int? id) {
 			new PoiDialog(_resolver, id).Show(ParentFragmentManager, null);
+		}
+
+		internal void OnLocation(Location location) {
 		}
 	}
 	class PoiRecyclerViewAdapter : RecyclerView.Adapter {

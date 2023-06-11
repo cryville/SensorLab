@@ -17,6 +17,7 @@
 	<string name="location_accuracy">精度</string>
 	<string name="location_altitude">海拔</string>
 	<string name="location_bearing">方位</string>
+	<string name="location_fixing">定位中……</string>
 	<string name="location_input_hint">位置（格式：12\'34\'56 12\'34\'56）</string>
 	<string name="location_latitude">纬度</string>
 	<string name="location_longitude">经度</string>

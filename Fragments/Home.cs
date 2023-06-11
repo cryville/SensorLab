@@ -1,8 +1,10 @@
+using Android.Content;
 using Android.Hardware;
 using Android.Locations;
 using Android.OS;
 using Android.Views;
 using AndroidX.Fragment.App;
+using AndroidX.Lifecycle;
 using AndroidX.ViewPager2.Adapter;
 using AndroidX.ViewPager2.Widget;
 using Cryville.Input;
@@ -18,10 +20,8 @@ namespace SensorLab.Fragments {
 		ViewPager2 _viewPager;
 
 		static bool _init;
-		GnssStatusReceiver _gnssRecv;
-		CompassView _compass;
+		public static Location CurrentLocation { get; private set; } = new Location((string)null);
 		LocationManager _locMgr;
-		LocationReceiver _locRecv;
 
 		public override void OnCreate(Bundle savedInstanceState) {
 			base.OnCreate(savedInstanceState);
@@ -43,10 +43,9 @@ namespace SensorLab.Fragments {
 			InputConsumer.Instance.OnInput += InputConsumer_OnInput;
 			InputConsumer.Instance.Activate();
 
-			_gnssRecv = new GnssStatusReceiver();
-			_gnssRecv.SatelliteStatusChanged += OnSatelliteStatusChanged;
-			_locMgr = (LocationManager)Activity.GetSystemService(Android.Content.Context.LocationService);
-			_locRecv = new LocationReceiver(OnLocation);
+			Context.StartForegroundService(new Intent(Context, typeof(LocationService)));
+			_locMgr = (LocationManager)Activity.GetSystemService(Context.LocationService);
+			LocationService.LocationData.Observe(this, new LocationObserver(this));
 		}
 
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -108,8 +107,15 @@ namespace SensorLab.Fragments {
 			_fragOverview?.OnInput(identifier, frame);
 		}
 
-		private void OnLocation(Location location) {
-			_fragOverview?.OnLocation(location);
+		class LocationObserver : Object, IObserver {
+			readonly Home _parent;
+			public LocationObserver(Home parent) { _parent = parent; }
+			public void OnChanged(Object value) {
+				Location location = (Location)value;
+				CurrentLocation.Set(location);
+				_parent._fragOverview?.OnLocation(location);
+				_parent._fragRadar?.OnLocation(location);
+			}
 		}
 
 		public override void OnPause() {
@@ -128,22 +134,11 @@ namespace SensorLab.Fragments {
 		}
 
 		void Start() {
-			_locMgr.RequestLocationUpdates(
-				LocationManager.GpsProvider,
-				new LocationRequest.Builder(1000)
-					.SetQuality((int)LocationRequestQuality.HighAccuracy)
-					.Build(),
-				Context.MainExecutor,
-				_locRecv
-			);
-			_locMgr.RegisterGnssStatusCallback(_gnssRecv, null);
 			InputConsumer.Instance.Activate();
 		}
 
 		void Pause() {
 			InputConsumer.Instance.Deactivate();
-			_locMgr.RemoveUpdates(_locRecv);
-			_locMgr.UnregisterGnssStatusCallback(_gnssRecv);
 		}
 
 		private void OnSatelliteStatusChanged() {

@@ -101,10 +101,12 @@
     <Compile Include="Fragments\Overview.cs" />
     <Compile Include="InputConsumer.cs" />
     <Compile Include="LocationReceiver.cs" />
+    <Compile Include="LocationService.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="PoiProvider.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
@@ -156,7 +158,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <Content Include="Plugins\UnsafeIL.dll" />
-    <AndroidResource Include="Resources\navigation\nav_graph.xml" />
+    <AndroidResource Include="Resources\navigation\nav_graph.xml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\fragment_overview.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
