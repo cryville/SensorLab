@@ -112,12 +112,17 @@ namespace SensorLab.Dialogs {
 		}
 		static string ToLocationString(double lat, double lon) {
 			static string ToLocationComponentString(double value) {
+				bool negFlag = false;
+				if (value < 0) {
+					negFlag = true;
+					value = -value;
+				}
 				int d = (int)value;
 				value *= 60; value %= 60;
 				int m = (int)value;
 				value *= 60; value %= 60;
 				double s = Math.Round(value, 3);
-				return string.Format(CultureInfo.InvariantCulture, "{0}'{1}'{2}", d, m, s);
+				return string.Format(CultureInfo.InvariantCulture, "{3}{0}'{1}'{2}", d, m, s, negFlag ? "-" : "");
 			}
 			return string.Format("{0} {1}", ToLocationComponentString(lat), ToLocationComponentString(lon));
 		}
