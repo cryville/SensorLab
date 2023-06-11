@@ -65,8 +65,8 @@ namespace SensorLab.Fragments {
 		}
 
 		internal void OnLocation(Location location) {
-			_viewLocLatitude.DataValue = ToDMS(location.Latitude);
-			_viewLocLongitude.DataValue = ToDMS(location.Longitude);
+			_viewLocLatitude.DataValue = Util.ToDmsString(location.Latitude, "S", "N");
+			_viewLocLongitude.DataValue = Util.ToDmsString(location.Longitude, "W", "E");
 			_viewLocAltitude.DataValue = location.HasAltitude ? location.Altitude.ToString("F1") : "?";
 			_viewLocAltitude.DataAccuracy = location.HasVerticalAccuracy ? location.VerticalAccuracyMeters.ToString("F1") : null;
 			_viewLocBearing.DataValue = location.HasBearing ? location.Bearing.ToString("F1") : "?";
@@ -78,13 +78,5 @@ namespace SensorLab.Fragments {
 		}
 
 		static float GetMagnitude(InputVector vector) => MathF.Sqrt(vector.X * vector.X + vector.Y * vector.Y + vector.Z * vector.Z + vector.W * vector.W);
-		static string ToDMS(double value) {
-			int d = (int)value;
-			value *= 60; value %= 60;
-			int m = (int)value;
-			value *= 60; value %= 60;
-			int s = (int)value;
-			return string.Format("{0}¡ã{1}¡ä{2}¡å", d, m, s);
-		}
 	}
 }
