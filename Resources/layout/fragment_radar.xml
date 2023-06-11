@@ -26,11 +26,11 @@
 		android:layout_height="wrap_content"
 		android:layout_gravity="bottom|end"
 		android:layout_marginBottom="16dp">
-		<com.google.android.material.floatingactionbutton.FloatingActionButton
+		<!--<com.google.android.material.floatingactionbutton.FloatingActionButton
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginRight="16dp"
-			android:src="@android:drawable/ic_menu_search" />
+			android:src="@android:drawable/ic_menu_search" />-->
 		<com.google.android.material.floatingactionbutton.FloatingActionButton
 			android:id="@+id/fab_add_poi"
 			android:layout_width="wrap_content"

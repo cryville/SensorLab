@@ -18,7 +18,7 @@ namespace SensorLab.Controls {
 		static CompassView() {
 			_strokeBg = new Paint { Color = Color.LightBlue, StrokeWidth = 0.02f, AntiAlias = true };
 			_strokeBg.SetStyle(Paint.Style.Stroke);
-			_fillText = new Paint { Color = Color.LightBlue, TextSize = 24f, TextAlign = Paint.Align.Center, AntiAlias = true };
+			_fillText = new Paint { Color = Color.SkyBlue, TextSize = 24f, TextAlign = Paint.Align.Center, AntiAlias = true };
 			_fillText.SetStyle(Paint.Style.Fill);
 		}
 
@@ -65,6 +65,8 @@ namespace SensorLab.Controls {
 			float fcoef = FlipRotation ? -1 : 1;
 
 			canvas.Rotate(-fcoef * CompassRotation, 0, 0);
+			canvas.DrawLine(-_compassSize, 0, _compassSize, 0, _strokeBg);
+			canvas.DrawLine(0, -_compassSize, 0, _compassSize, _strokeBg);
 			for (int i = 0; i < _directions.Length; i++) {
 				canvas.DrawLine(0, -_compassSize, 0, -(_compassSize - 0.04f), _strokeBg);
 				DrawText(canvas, Resources.GetString(_directions[i]), 0, -(_compassSize + 0.04f), _fillText);

@@ -60,13 +60,13 @@
 			android:layout_height="wrap_content">
 			<SensorLab.Controls.SensorDataView
 				android:layout_width="0dp"
-				android:layout_weight="4"
+				android:layout_weight="5"
 				android:layout_height="wrap_content"
 				android:id="@+id/location_latitude"
 				custom:caption="@string/location_latitude" />
 			<SensorLab.Controls.SensorDataView
 				android:layout_width="0dp"
-				android:layout_weight="4"
+				android:layout_weight="5"
 				android:layout_height="wrap_content"
 				android:id="@+id/location_longitude"
 				custom:caption="@string/location_longitude" />
