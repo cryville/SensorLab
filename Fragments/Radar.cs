@@ -45,6 +45,17 @@ namespace SensorLab.Fragments {
 		}
 
 		internal void OnLocation(Location location) {
+			_compass.Location = location;
+		}
+		internal void OnPoiUpdate(ICursor cursor) {
+			_compass.ClearPois();
+			var colName = cursor.GetColumnIndex("name");
+			var colLatitude = cursor.GetColumnIndex("latitude");
+			var colLongitude = cursor.GetColumnIndex("longitude");
+			while (cursor.MoveToNext()) {
+				_compass.AddPoi(cursor.GetString(colName), cursor.GetDouble(colLatitude), cursor.GetDouble(colLongitude));
+			}
+			_compass.EndAddPois();
 		}
 	}
 	class PoiRecyclerViewAdapter : RecyclerView.Adapter {
@@ -88,6 +99,7 @@ namespace SensorLab.Fragments {
 		void RefreshData() {
 			_cursor?.Close();
 			_cursor = _parent._resolver.Query(PoiProvider.Uri, null, null, null, null);
+			_parent.OnPoiUpdate(_cursor);
 			_cursor.RegisterContentObserver(_observer);
 		}
 
